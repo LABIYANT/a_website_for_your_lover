@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Seni Seviyorum Rana</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"> 
+<style>
+body, html { height: 100%; margin: 0; overflow: hidden }
+.container { 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    height: 100%; 
+    background-color: lightpink; 
+    font-size: 8vw; 
+    text-align: center;
+    word-break: break-word;
+} 
+.messages p { margin-bottom: 20px; display: none }
+.visible { display: block } 
+</style>
+</head>
+<body>
+<div class="container">
+<h1 id="main-message">SENİ SEVİYORUM RANA</h1>
+</div>
+<div class="messages"></div>
+
+<script>
+const msgsContainer = document.querySelector('.messages');
+const mainMsg = document.getElementById('main-message');
+
+const mainMessages = [
+    "SENİ SEVİYORUM RANA",
+    "Kalbimin Tek Sahibi",
+    "Seninle Sonsuza Kadar",
+    "Aşkımız Ebedi",
+    'Seninle olmak, dünyadaki en güzel şey.',
+    'Gözlerinde kaybolmak istiyorum.',
+    'Kalbimin tek sahibi sensin.',
+    'Seni her gün daha çok seviyorum.',
+    "Seninle geçirdiğim her an bir hediye.",
+    "Gülüşün dünyamı aydınlatıyor.",
+    "Sen benim ilham kaynağımsın.",
+    "Hayatımın anlamı sensin.",
+    "Seninle her şey daha güzel.",
+    "Kalbimin ritmi senin adınla atıyor.",
+    "Sen benim en güzel melodimsin.",
+    "Seninle geleceğe umutla bakıyorum.",
+    "Aşkımızın sınırı yok.",
+    "Sen benim en değerli hazinemsin.",
+    "Seninle olmak, kendimi evimde hissetmek gibi.",
+    "Gözlerin, beni sonsuzluğa götüren bir kapı.",
+    "Seninle her yeni gün bir macera.",
+    "Sen benim en büyük mutluluğumsun.",
+    "Kalbimin en derin köşesinde sen varsın.",
+    "Seninle yaşamak, bir rüyada gibi.",
+    "Aşkımız, zamanın ötesinde bir bağ.",
+    "Sen benim en güzel hikayemsin.",
+    "Seninle her şey mümkün.",
+    "Sen benim en değerli varlığımsın.",
+    "Seninle olmak, dünyadaki en büyük şansım.",
+    "Gülüşün, kalbimi ısıtan bir güneş.",
+    "Sen benim en büyük motivasyonumsun.",
+    "Seninle her an özel.",
+    "Aşkımız, zamanla daha da güçleniyor.",
+    "Sen benim en güzel düşümü gerçekleştirdin.",
+    "Seninle olmak, kalbimin en derin arzusuydu.",
+    "Sen benim hayatımın en güzel renklerisin.",
+    "Seninle her şey daha anlamlı.",
+    "Aşkımız, bir peri masalından fırlamış gibi.",
+    "Sen benim en büyük ilham kaynağımsın.",
+    "Seninle olmak, dünyanın en güzel hissi.",
+    "Gözlerin, kalbimin en derinlerine işliyor.",
+    "Sen benim en büyük armağanımsın.",
+    "Seninle her anı yaşamaya değer.",
+    "Aşkımız, sonsuzluğa uzanan bir yol.",
+    "Sen benim en güzel şarkılarımsın.",
+    "Seninle olmak, kendimi tamamlanmış hissetmek gibi.",
+    "Sen benim en büyük destekçimsin.",
+    "Seninle her şey daha kolay.",
+    "Aşkımız, dünyadaki en güçlü bağ.",
+    "Sen benim en güzel hayalimsin.",
+    "Seninle olmak, kalbimin en büyük mutluluğu.",
+    "Sen benim hayatımın en güzel melodisisin.",
+    "Seninle her anı bir ömür gibi yaşamak istiyorum.",
+    "Aşkımız, zamanın durduğu bir an.",
+    "Sen benim en güzel şiirlerimsin.",
+    "Seninle olmak, dünyadaki en büyük şansım.",
+    "Gülüşün, kalbimi eriten bir sıcaklık.",
+    "Sen benim en büyük ilham kaynağımsın.",
+    "Seninle her an özel ve anlamlı.",
+    "Aşkımız, bir ressamın en güzel tablosu gibi.",
+    "Sen benim en büyük hayalimi gerçekleştirdin.",
+    "Seninle olmak, kalbimin en derin arzusuydu.",
+    "Sen benim hayatımın en güzel renklerisin.",
+    "Seninle her şey daha anlamlı ve değerli.",
+    "Aşkımız, bir müzisyenin en güzel bestesi gibi.",
+    "Sen benim en büyük ilham kaynağımsın.",
+    "Seninle olmak, dünyadaki en güzel hissi yaşamak gibi.",
+    "Gözlerin, kalbimin en derinlerine işliyor ve beni büyülüyor.",
+    "Sen benim en büyük armağanımsın, hayatıma anlam katan.",
+    "Seninle her anı yaşamaya değer, her anı bir ömür gibi.",
+    "Aşkımız, sonsuzluğa uzanan bir yol, hiç bitmeyecek bir yolculuk.",
+    "Sen benim en güzel şarkılarımsın, kalbimi titreten melodiler.",
+    "Seninle olmak, kendimi tamamlanmış ve mutlu hissetmek gibi.",
+    "Sen benim en büyük destekçimsin, her zaman yanımda olan.",
+    "Seninle her şey daha kolay, her zorluk aşılabilir.",
+    "Aşkımız, dünyadaki en güçlü bağ, kopmaz bir zincir.",
+    "Sen benim en güzel hayalimsin, gerçekleşen bir rüya gibi.",
+    "Seninle olmak, kalbimin en büyük mutluluğu, tarifsiz bir duygu.",
+    "Sen benim hayatımın en güzel melodisisin, ruhumu dans ettiren.",
+    "Seninle her anı bir ömür gibi yaşamak istiyorum, sonsuza kadar.",
+    "Aşkımız, zamanın durduğu bir an, sonsuz bir mutluluk.",
+    "Sen benim en güzel şiirlerimsin, kalbimi dile getiren sözler.",
+    "Seninle olmak, dünyadaki en büyük şansım, en büyük mutluluğum.",
+];
+
+const fontFamilies = [
+    "Arial",
+    "Helvetica",
+    "Verdana",
+    "Georgia",
+    "Times New Roman",
+    "Courier New",
+    "Brush Script MT",
+    "Impact",
+    "Comic Sans MS",
+    "Lucida Console"
+];
+
+let msgIdx = 0, mainMsgIdx = 0, fontIdx = 0;
+
+mainMessages.forEach(msg => {
+    const p = document.createElement('p');
+    p.textContent = msg;
+    msgsContainer.appendChild(p);
+});
+
+document.addEventListener('click', (event) => {
+    if (event.detail > 1) {
+        event.preventDefault();
+        return;
+    }
+
+    mainMsg.textContent = mainMessages[mainMsgIdx++ % mainMessages.length]; 
+    mainMsg.style.fontFamily = fontFamilies[fontIdx++ % fontFamilies.length];
+
+    adjustFontSizeToFit(mainMsg);
+
+    if (msgIdx < msgsContainer.children.length) {
+        msgsContainer.children[msgIdx++].classList.add('visible');
+    }
+});
+
+function adjustFontSizeToFit(element) {
+    let fontSize = parseInt(window.getComputedStyle(element).fontSize);
+
+    while (element.scrollWidth > element.clientWidth && fontSize > 0) {
+        fontSize--;
+        element.style.fontSize = fontSize + "px";
+    }
+}
+</script>
+</body>
+</html>
